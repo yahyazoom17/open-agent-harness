@@ -1,4 +1,5 @@
 from pathlib import Path
+from memory import load_memory, save_memory
 
 WORKSPACE = Path(__file__).parent / "workspace"
 
@@ -23,6 +24,8 @@ TOOLS = {
     "list_files": list_files,
     "read_file": read_file,
     "write_file": write_file,
+    "load_memory": load_memory,
+    "save_memory": save_memory,
 }
 
 TOOL_SCHEMAS = [
@@ -72,6 +75,34 @@ TOOL_SCHEMAS = [
                     }
                 },
                 "required": ["file_name", "content"],
+            }            
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "load_memory",
+            "description": "Load the agent memory from the MEMORY.md file.",
+            "parameters": {
+                "type": "object",
+                "properties": {},
+            }            
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "save_memory",
+            "description": "Save the agent memory to the MEMORY.md file.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "memory": {
+                        "type": "string",
+                        "description": "The memory content to save.",
+                    }
+                },
+                "required": ["memory"],
             }            
         }
     },
